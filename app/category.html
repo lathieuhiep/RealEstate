@@ -2,17 +2,112 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Library CSS -->
+    <link rel="stylesheet" href="assets/css/library.min.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="assets/libs/fontawesome/css/all.min.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <title>Bất động sản - Danh mục</title>
 </head>
 <body>
-    <header>
-        đây là header
-    </header>
-    <div>
-        đây là phần nội dung file category
+<header class="header">
+    <div class="container-fluid container-warp">
+        <nav class="navbar navbar-header">
+            <div class="left">
+                <a class="logo d-flex align-items-center" href="#">
+                    <img src="assets/images/logo.png" alt="logo">
+                </a>
+
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="menu d-lg-block collapse navbar-collapse" id="menu">
+                <ul>
+                    <li>
+                        <a href="#">Nhà đất bán</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Nhà đất cho thuê</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Dự án</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Tin tức</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Wiki BĐS</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Phong thủy</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Nội - Ngoại thất</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Danh bạ</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="header__right">
+            <div class="save-list" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Danh sách tin đã lưu" data-bs-custom-class="tooltip-save">
+                <a class="save-list__btn" href="#">
+                    <i class="fa-regular fa-heart"></i>
+                </a>
+            </div>
+
+            <div class="user-action">
+                <a class="login" href="#">
+                    Đăng nhập
+                </a>
+
+                <a class="sign" href="#">
+                    Đăng kí
+                </a>
+            </div>
+
+            <div class="post">
+                <a class="post__btn" href="#">
+                    Đăng tin
+                </a>
+            </div>
+        </div>
     </div>
-    <footer>
-        đây là footer
-    </footer>
+</header>
+
+<div class="sticky-footer">
+    <div class="element-banner">
+        <div class="container">
+            Danh muc
+        </div>
+    </div>
+</div>
+
+<footer>
+    đây là footer
+</footer>
+
+<!-- Library Script -->
+<script src="assets/js/library.min.js"></script>
+<script src="assets/js/template.js"></script>
 </body>
 </html>

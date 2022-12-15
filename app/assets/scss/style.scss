@@ -1,6 +1,34 @@
-body {
-  min-height: 100vh;
-  overflow-x: hidden;
-  font-size: 1.4rem;
-  line-height: 1.2;
-}
+/*
+Template Name: RealEstate
+Theme URI: https://uxui.vn/
+Author: DiepLK
+Author URI: https://www.facebook.com/lathieuhiep
+Version: 1.0.0
+Description: Template RealEstate
+*/
+
+/**
+* Table of Contents:
+*
+# General
+# Reboot Bootstrap
+# Header
+* -----------------------------------------------------------------------------
+*/
+
+@import "variables/variables";
+
+/**
+# General
+-----------------------------------------------------------------------------*/
+@import "general";
+
+/**
+# Reboot Bootstrap
+-----------------------------------------------------------------------------*/
+@import "reboot-bootstrap";
+
+/**
+# Header
+-----------------------------------------------------------------------------*/
+@import "componets/header";

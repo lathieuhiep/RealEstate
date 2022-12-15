@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+@@include('../components/head.html', { "title": "Trang chủ", "stylePage": { "hasStyle": "true", "fileName": "home.css" } })
 <body>
     @@include('../components/header.html')
-    <div>
-        Đây là phần nội dung file index
+
+    <div class="sticky-footer">
+        <div class="element-banner">
+            <div class="container">
+                @@include('../components/tabs-search.html')
+            </div>
+        </div>
     </div>
+
     @@include('../components/footer.html')
 </body>
 </html>

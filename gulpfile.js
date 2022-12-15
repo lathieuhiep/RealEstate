@@ -43,6 +43,17 @@ function buildStyles() {
 }
 exports.buildStyles = buildStyles;
 
+// Task build styles pages
+function buildStylesPages() {
+    return src(`${pathRoot}assets/scss/pages/*.scss`)
+        .pipe(sourcemaps.init())
+        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+        .pipe(sourcemaps.write())
+        .pipe(dest(`${pathRoot}assets/css/pages/`))
+        .pipe(browserSync.stream());
+}
+exports.buildStylesPages = buildStylesPages;
+
 // Task compress mini library css theme
 function compressLibraryCssMin() {
     return src([
@@ -61,6 +72,7 @@ exports.compressLibraryCssMin = compressLibraryCssMin
 // Task compress lib js & mini file
 function compressLibraryJsMin() {
     return src([
+        './node_modules/jquery/dist/jquery.js',
         './node_modules/bootstrap/dist/js/bootstrap.bundle.js',
         './node_modules/owl.carousel/dist/owl.carousel.js',
     ], {allowEmpty: true})
@@ -73,7 +85,7 @@ exports.compressLibraryJsMin = compressLibraryJsMin
 
 // Task live reload html
 function liveReloadHTML() {
-    return src([`${pathRoot}*.html`])
+    return src([`${pathRoot}*.html`, `${pathRoot}assets/js/*.js`])
         .pipe(browserSync.reload({ stream: true }))
 }
 exports.liveReloadHTML = liveReloadHTML
@@ -82,6 +94,7 @@ exports.liveReloadHTML = liveReloadHTML
 function buildAppFirst() {
     includeHTML()
     buildStyles()
+    buildStylesPages()
     watchTask()
 }
 exports.buildAppFirst = buildAppFirst
@@ -92,6 +105,8 @@ function watchTask() {
     watch(`${pathRoot}pages/*.html`, includeHTML)
     watch(`${pathRoot}components/*.html`, includeHTML)
     watch(`${pathRoot}assets/scss/**/*.scss`, buildStyles)
+    watch(`${pathRoot}assets/scss/pages/*.scss`, buildStylesPages)
     watch(`${pathRoot}*.html`, liveReloadHTML)
+    watch(`${pathRoot}assets/js/*.js`, liveReloadHTML)
 }
 exports.watchTask = watchTask
