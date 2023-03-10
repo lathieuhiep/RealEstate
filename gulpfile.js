@@ -5,6 +5,7 @@ const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync');
 const concat = require('gulp-concat');
+const concatCss = require('gulp-concat-css');
 const uglify = require('gulp-uglify');
 const fileInclude = require('gulp-file-include');
 const minifyCss = require('gulp-clean-css');
@@ -21,6 +22,36 @@ function server() {
         server: pathDestBuild
     })
 }
+
+// Task build fontawesome
+function buildFontawesomeStyle() {
+    return src([
+        './node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss',
+        './node_modules/@fortawesome/fontawesome-free/scss/brands.scss',
+        './node_modules/@fortawesome/fontawesome-free/scss/solid.scss',
+    ])
+        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+        .pipe(concatCss('font-awesome.css'))
+        .pipe(minifyCss({
+            level: {1: {specialComments: 0}}
+        }))
+        .pipe(rename( {suffix: '.min'} ))
+        .pipe(dest(`${pathDestBuild}assets/icons/css`))
+        .pipe(browserSync.stream());
+}
+exports.buildFontawesomeStyle = buildFontawesomeStyle
+
+function buildFontawesomeWebFonts() {
+    return src([
+        './node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf',
+        './node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2',
+        './node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf',
+        './node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2'
+    ])
+        .pipe(dest(`${pathDestBuild}assets/icons/webfonts`))
+        .pipe(browserSync.stream());
+}
+exports.buildFontawesomeWebFonts = buildFontawesomeWebFonts
 
 // Task buildSCSSLibs
 function buildCSSLibs() {
@@ -119,10 +150,11 @@ function liveReload() {
     ])
         .pipe(browserSync.reload({ stream: true }))
 }
-exports.liveReload = liveReload
 
 // build app first
 function buildAppFirst() {
+    buildFontawesomeStyle()
+    buildFontawesomeWebFonts()
     buildCSSLibs()
     buildStyle()
     buildStylePages()
@@ -162,6 +194,6 @@ function watchTask() {
         `${pathDestBuild}**/*.css`,
         `${pathDestBuild}**/*.js`,
         `${pathDestBuild}assets/images/**/*`
-    ], liveReload)
+    ], browserSync.reload({ stream: true }))
 }
 exports.watchTask = watchTask
