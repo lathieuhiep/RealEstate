@@ -16,17 +16,12 @@ Description: Template RealEstate
 * -----------------------------------------------------------------------------
 */
 
-@import "variables/variables";
+@import "abstracts/abstracts";
 
 /**
 # General
 -----------------------------------------------------------------------------*/
 @import "general";
-
-/**
-# Reboot Bootstrap
------------------------------------------------------------------------------*/
-@import "reboot-bootstrap";
 
 /**
 # Header
