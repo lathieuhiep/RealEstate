@@ -141,7 +141,7 @@ async function includeHTML() {
 exports.includeHTML = includeHTML;
 
 // build app first
-async function buildAppFirst() {
+async function buildApp() {
     await buildFontawesomeStyle()
     await buildFontawesomeWebFonts()
     await buildCSSLibs()
@@ -153,7 +153,7 @@ async function buildAppFirst() {
     await includeHTML()
     await watchTask()
 }
-exports.buildAppFirst = buildAppFirst
+exports.buildApp = buildApp
 
 // Task watch
 function watchTask() {

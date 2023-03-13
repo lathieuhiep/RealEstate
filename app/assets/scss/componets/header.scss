@@ -1,57 +1,31 @@
 .header {
-  font-weight: 500;
-  height: 96px;
-  box-shadow: 0 4px 10px rgba(182,182,182,0.18);
-  background-color: #ffffff;
-
-  .container-warp {
-    height: inherit;
-    @include grid-columns(12px, 1fr auto);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  
+  &__top {
+    padding: 0 5.5rem;
+    border-bottom: 1px solid $border-color-second;
+    
+    ul {
+      display: flex;
+    }
   }
-
-  &__right {
-    height: inherit;
-    align-items: center;
-    @include grid-columns(24px, repeat(3, auto));
-
-    .save-list {
-      height: inherit;
-      @include flex-center-vert;
-
-      &__btn {
-        font-size: 2.4rem;
-      }
+  
+  .list-social {
+    a {
+      padding: 0.9rem 1.6rem;
+      display: inline-block;
+      color: $color-white;
+      border-right: 1px solid $border-color-second;
     }
-
-    .user-action {
-      @include grid-columns(24px, repeat(2, auto));
-
-      a {
-        position: relative;
-        display: block;
-
-        &:not(:last-child) {
-          &:after {
-            position: absolute;
-            content: "";
-            top: 0;
-            right: -12px;
-            width: 1px;
-            height: 100%;
-            background-color: #e5e5e5;
-          }
-        }
-      }
-    }
-
-    .post {
-      &__btn {
-        padding: 8px 16px;
-        border: 1px solid $border-color-primary;
-        border-radius: 4px;
-
-        &:hover {
-          background-color: $background-primary;
+    
+    li {
+      &:first-child {
+        a {
+          border-left: 1px solid $border-color-second;
         }
       }
     }
@@ -76,9 +50,7 @@
       > li {
         position: relative;
         padding: 0 12px;
-
-
-
+        
         &:first-child {
           padding-left: 0;
         }
@@ -126,8 +98,4 @@
       }
     }
   }
-}
-
-.tooltip-save {
-  font-size: 1.4rem;
 }
