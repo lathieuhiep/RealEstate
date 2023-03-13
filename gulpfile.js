@@ -162,7 +162,6 @@ function buildAppFirst() {
     buildJsTemplate()
     optimizeImages()
     includeHTML()
-    watchTask()
 }
 exports.buildAppFirst = buildAppFirst
 
