@@ -151,6 +151,7 @@ async function buildAppFirst() {
     await buildJsTemplate()
     await optimizeImages()
     await includeHTML()
+    await watchTask()
 }
 exports.buildAppFirst = buildAppFirst
 
