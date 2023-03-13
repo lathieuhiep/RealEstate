@@ -189,11 +189,6 @@ function watchTask() {
     watch(`${pathRoot}**/*.html`, includeHTML)
 
     // watch liveReload
-    watch([
-        `${pathDestBuild}*.html`,
-        `${pathDestBuild}**/*.css`,
-        `${pathDestBuild}**/*.js`,
-        `${pathDestBuild}assets/images/**/*`
-    ], browserSync.reload({ stream: true }))
+    watch(`${pathDestBuild}**/*`, browserSync.reload({ stream: true }))
 }
 exports.watchTask = watchTask
