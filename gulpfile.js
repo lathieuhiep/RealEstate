@@ -24,8 +24,8 @@ function server() {
 }
 
 // Task build fontawesome
-function buildFontawesomeStyle() {
-    return src([
+async function buildFontawesomeStyle() {
+    return await src([
         './node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss',
         './node_modules/@fortawesome/fontawesome-free/scss/brands.scss',
         './node_modules/@fortawesome/fontawesome-free/scss/solid.scss',
@@ -35,14 +35,14 @@ function buildFontawesomeStyle() {
         .pipe(minifyCss({
             level: {1: {specialComments: 0}}
         }))
-        .pipe(rename( {suffix: '.min'} ))
+        .pipe(rename({suffix: '.min'}))
         .pipe(dest(`${pathDestBuild}assets/icons/css`))
-        .pipe(browserSync.stream());
+        .pipe(browserSync.stream())
 }
 exports.buildFontawesomeStyle = buildFontawesomeStyle
 
-function buildFontawesomeWebFonts() {
-    return src([
+async function buildFontawesomeWebFonts() {
+    return await src([
         './node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf',
         './node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2',
         './node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf',
@@ -54,8 +54,8 @@ function buildFontawesomeWebFonts() {
 exports.buildFontawesomeWebFonts = buildFontawesomeWebFonts
 
 // Task buildSCSSLibs
-function buildCSSLibs() {
-    return src([
+async function buildCSSLibs() {
+    return await src([
         `${pathRoot}assets/scss/libs/*.scss`
     ])
         .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
@@ -69,8 +69,8 @@ function buildCSSLibs() {
 exports.buildCSSLibs = buildCSSLibs;
 
 // Task build styles
-function buildStyle() {
-    return src(`${pathRoot}assets/scss/style.scss`)
+async function buildStyle() {
+    return await src(`${pathRoot}assets/scss/style.scss`)
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
         .pipe(sourcemaps.write())
@@ -80,8 +80,8 @@ function buildStyle() {
 exports.buildStyle = buildStyle;
 
 // Task build styles pages
-function buildStylePages() {
-    return src(`${pathRoot}assets/scss/pages/*.scss`)
+async function buildStylePages() {
+    return await src(`${pathRoot}assets/scss/pages/*.scss`)
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
         .pipe(sourcemaps.write())
@@ -91,8 +91,8 @@ function buildStylePages() {
 exports.buildStylePages = buildStylePages;
 
 // Task compress lib js & mini file
-function compressLibraryJsMin() {
-    return src([
+async function compressLibraryJsMin() {
+    return await src([
         './node_modules/jquery/dist/jquery.js',
         './node_modules/bootstrap/dist/js/bootstrap.bundle.js',
         './node_modules/owl.carousel/dist/owl.carousel.js',
@@ -105,8 +105,8 @@ function compressLibraryJsMin() {
 exports.compressLibraryJsMin = compressLibraryJsMin
 
 // task build js page
-function buildJsTemplate() {
-    return src(`${pathRoot}assets/js/**/*.js`, {allowEmpty: true})
+async function buildJsTemplate() {
+    return await src(`${pathRoot}assets/js/**/*.js`, {allowEmpty: true})
         .pipe(uglify())
         .pipe(rename( {suffix: '.min'} ))
         .pipe(dest(`${pathDestBuild}assets/js/`))
@@ -115,11 +115,11 @@ function buildJsTemplate() {
 exports.buildJsTemplate = buildJsTemplate
 
 // Task optimize images
-function optimizeImages() {
+async function optimizeImages() {
     const imgSrc = `${pathRoot}assets/images/**/*.+(png|jpg|webp|svg|gif)`;
     const imgDst = `${pathDestBuild}assets/images`;
 
-    return src(imgSrc)
+    return await src(imgSrc)
         .pipe(changed(imgDst))
         .pipe(imagemin())
         .pipe(dest(imgDst))
@@ -128,8 +128,8 @@ function optimizeImages() {
 exports.optimizeImages = optimizeImages;
 
 // Task include HTML
-function includeHTML() {
-    return src([`${pathRoot}pages/*.html`])
+async function includeHTML() {
+    return await src([`${pathRoot}pages/*.html`])
         .pipe(fileInclude({
             prefix: '@@',
             basepath: '@file',
@@ -140,28 +140,17 @@ function includeHTML() {
 }
 exports.includeHTML = includeHTML;
 
-// Task live reload html
-function liveReload() {
-    return src([
-        `${pathDestBuild}*.html`,
-        `${pathDestBuild}**/*.css`,
-        `${pathDestBuild}**/*.js`,
-        `${pathDestBuild}assets/images/**/*`
-    ])
-        .pipe(browserSync.reload({ stream: true }))
-}
-
 // build app first
-function buildAppFirst() {
-    buildFontawesomeStyle()
-    buildFontawesomeWebFonts()
-    buildCSSLibs()
-    buildStyle()
-    buildStylePages()
-    compressLibraryJsMin()
-    buildJsTemplate()
-    optimizeImages()
-    includeHTML()
+async function buildAppFirst() {
+    await buildFontawesomeStyle()
+    await buildFontawesomeWebFonts()
+    await buildCSSLibs()
+    await buildStyle()
+    await buildStylePages()
+    await compressLibraryJsMin()
+    await buildJsTemplate()
+    await optimizeImages()
+    await includeHTML()
 }
 exports.buildAppFirst = buildAppFirst
 
