@@ -178,6 +178,6 @@ function watchTask() {
     watch(`${pathRoot}**/*.html`, includeHTML)
 
     // watch liveReload
-    watch(`${pathDestBuild}**/*`, browserSync.reload({ stream: true }))
+    watch(`${pathDestBuild}**/*`, browserSync.reload)
 }
 exports.watchTask = watchTask
